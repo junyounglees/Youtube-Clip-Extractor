@@ -134,7 +134,7 @@ else
         -ss "$START_TIME_FORMATTED" \
         -t "$duration_seconds" \
         -c:v libx264 \
-        -c:a aac \
+        -c:a copy \
         -avoid_negative_ts make_zero \
         -fflags +genpts \
         "$OUTPUT_FILE" \

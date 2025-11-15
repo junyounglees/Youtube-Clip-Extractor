@@ -246,10 +246,10 @@ HTML_TEMPLATE = """
                 seconds = parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]);
             }
 
-            // Update iframe src with time parameter
+            // Update iframe src with time parameter (preserve Korean audio settings)
             const iframe = document.getElementById('youtubePlayer');
             const currentSrc = iframe.src.split('?')[0];
-            iframe.src = currentSrc + '?start=' + seconds + '&autoplay=1';
+            iframe.src = currentSrc + '?start=' + seconds + '&autoplay=1&hl=ko&cc_lang_pref=ko';
         }
 
         async function loadTranscript() {
@@ -284,7 +284,7 @@ HTML_TEMPLATE = """
                 if (data.success) {
                     // Make timestamps clickable
                     const transcriptDiv = document.getElementById('transcriptText');
-                    const lines = data.transcript.split('\n');
+                    const lines = data.transcript.split('\\n');
                     transcriptDiv.innerHTML = '';
 
                     lines.forEach(line => {
@@ -350,10 +350,10 @@ HTML_TEMPLATE = """
                     // Store video ID for transcript fetching
                     currentVideoId = data.videoId;
 
-                    // Load YouTube player instead of thumbnail
+                    // Load YouTube player with original audio track
                     const playerDiv = document.getElementById('videoPlayer');
                     const iframe = document.getElementById('youtubePlayer');
-                    iframe.src = 'https://www.youtube.com/embed/' + data.videoId;
+                    iframe.src = 'https://www.youtube.com/embed/' + data.videoId + '?hl=ko&cc_lang_pref=ko';
                     playerDiv.style.display = 'block';
 
                     document.getElementById('videoInfo').innerHTML = `
